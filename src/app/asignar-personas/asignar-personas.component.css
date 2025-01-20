@@ -1,0 +1,61 @@
+.modal-container {
+    display: flex;
+    gap: 16px;
+  }
+  
+  mat-card {
+    flex: 1;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  
+  .drop-list {
+    min-height: 200px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+  }
+  .draggable-item {
+    margin: 5px;
+    padding: 10px;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    cursor: move;
+    transition: background-color 0.3s ease;
+  }
+  
+  .draggable-item.cdk-drag-preview {
+    background-color: #c1e3ff;
+  }
+
+
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  button {
+    flex: 1;
+    padding: 8px;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 4px;
+    margin: 0 5px;
+    transition: background-color 0.3s, color 0.3s; /* Transición suave */
+  }
+  
+  button.selected {
+    background-color: #007bff; /* Color de fondo cuando está seleccionado */
+    color: white; /* Color del texto cuando está seleccionado */
+    border: 2px solid #0056b3; /* Borde más oscuro para remarcar el botón */
+  }
+  
+  button:hover {
+    background-color: #f1f1f1; /* Color de fondo al pasar el ratón */
+  }
+  
+  button:focus {
+    outline: none;
+  }
+  

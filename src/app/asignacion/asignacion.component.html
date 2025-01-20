@@ -1,0 +1,76 @@
+<p>asignacion works!</p>
+<div class="container">
+    <mat-toolbar color="primary">
+      <span>SGEO+</span>
+      <span class="spacer"></span>
+      <button mat-icon-button>
+        <mat-icon>account_circle</mat-icon>
+      </button>
+    </mat-toolbar>
+  
+    <div class="content">
+      <mat-sidenav-container>
+        <mat-sidenav mode="side" opened>
+          <mat-nav-list>
+            <mat-list-item>ASIGNACIÓN/DESIGNACIÓN</mat-list-item>
+            <mat-list-item>SEGUIMIENTO</mat-list-item>
+            <mat-list-item>PLANILLAS</mat-list-item>
+            <mat-list-item>REPORTES</mat-list-item>
+          </mat-nav-list>
+        </mat-sidenav>
+        <mat-sidenav-content>
+          <div class="table-container">
+            <h2>ASIGNACIÓN/DESIGNACIÓN</h2>
+
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+              <ng-container matColumnDef="codigo">
+                <th mat-header-cell *matHeaderCellDef>Código</th>
+                <td mat-cell *matCellDef="let element">{{ element.codigo }}</td>
+              </ng-container>
+  
+              <ng-container matColumnDef="nombreCarpeta">
+                <th mat-header-cell *matHeaderCellDef>Nombre de Carpeta</th>
+                <td mat-cell *matCellDef="let element">{{ element.nombreCarpeta }}</td>
+              </ng-container>
+  
+              <ng-container matColumnDef="presupuesto">
+                <th mat-header-cell *matHeaderCellDef>Presupuesto</th>
+                <td mat-cell *matCellDef="let element">{{ element.presupuesto }}</td>
+              </ng-container>
+  
+              <ng-container matColumnDef="unidadEjecutora">
+                <th mat-header-cell *matHeaderCellDef>Unidad Ejecutora</th>
+                <td mat-cell *matCellDef="let element">{{ element.unidadEjecutora }}</td>
+              </ng-container>
+  
+              <ng-container matColumnDef="fechaValidacion">
+                <th mat-header-cell *matHeaderCellDef>Fecha de Validación</th>
+                <td mat-cell *matCellDef="let element">{{ element.fechaValidacion }}</td>
+              </ng-container>
+  
+              <ng-container matColumnDef="duracion">
+                <th mat-header-cell *matHeaderCellDef>Duración</th>
+                <td mat-cell *matCellDef="let element">{{ element.duracion }}</td>
+              </ng-container>
+  
+               <ng-container matColumnDef="accion">
+    <th mat-header-cell *matHeaderCellDef> Acción </th>
+    <td mat-cell *matCellDef="let row">
+        <button mat-icon-button color="primary" (click)="openModalA()">
+            <mat-icon>person</mat-icon>
+          </button>
+      <button mat-icon-button (click)="openModal(row)" color="primary">
+        <mat-icon>play_arrow</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+  
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </div>
+        </mat-sidenav-content>
+      </mat-sidenav-container>
+    </div>
+  </div>
+  

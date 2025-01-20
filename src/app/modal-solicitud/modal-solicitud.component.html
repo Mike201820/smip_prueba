@@ -1,0 +1,47 @@
+<!-- <h2>Seleccione el tipo de personal que desea SOLICITAR</h2>
+
+<mat-form-field appearance="fill">
+  <mat-label>Tipo de Personal</mat-label>
+  <mat-select [(ngModel)]="tipoPersonal" (selectionChange)="onSelectionChange()">
+    <mat-option value="Supervisor">Supervisor</mat-option>
+    <mat-option value="Fiscal">Fiscal</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<div *ngIf="departamento" class="departamento-info">
+    <p style="text-align: center; font-weight: bold;">Departamento: {{ departamento }}</p>
+</div>
+
+<div class="actions">
+  <button mat-button color="warn" (click)="onCancel()">CANCELAR</button>
+  <button mat-button color="primary" (click)="onEnviar()">ENVIAR</button>
+</div> -->
+
+
+<h2>Seleccione el tipo de personal que desea SOLICITAR</h2>
+
+<div class="option-container">
+  <div
+    class="option"
+    [class.selected]="tipoPersonal === 'Supervisor'"
+    (click)="onSelect('Supervisor')"
+  >
+    Supervisor
+  </div>
+  <div
+    class="option"
+    [class.selected]="tipoPersonal === 'Fiscal'"
+    (click)="onSelect('Fiscal')"
+  >
+    Fiscal
+  </div>
+</div>
+
+<div *ngIf="departamento" class="departamento-info">
+  <p style="text-align: center; font-weight: bold;"> {{ departamento }}</p>
+</div>
+
+<div class="actions">
+  <button mat-button color="warn" (click)="onCancel()">CANCELAR</button>
+  <button mat-button color="primary" (click)="onEnviar()">ENVIAR</button>
+</div>

@@ -1,0 +1,29 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  .mat-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  .content {
+    display: flex;
+    flex-grow: 1;
+  }
+  
+  .table-container {
+    padding: 16px;
+  }
+  
+  .mat-sidenav-container {
+    height: calc(100vh - 64px); /* Restar el alto del toolbar */
+  }
+  
+  .spacer {
+    flex: 1;
+  }
+  

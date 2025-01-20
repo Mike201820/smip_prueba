@@ -1,0 +1,62 @@
+<div mat-dialog-content>
+    <div class="modal-container">
+      <!-- Card 1: No aprobados -->
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Lista</mat-card-title>
+          <mat-card-subtitle>
+            <div class="button-group">
+              <button 
+                mat-button 
+                (click)="selectedType = 'supervisores'; filterList()" 
+                [class.selected]="selectedType === 'supervisores'">
+                Supervisores
+              </button>
+              <button 
+                mat-button 
+                (click)="selectedType = 'fiscales'; filterList()" 
+                [class.selected]="selectedType === 'fiscales'">
+                Fiscales
+              </button>
+            </div>
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <div
+  cdkDropList
+  [cdkDropListData]="noAsignados"
+  [cdkDropListConnectedTo]="['aprobadosList']"
+  class="drop-list"
+  (cdkDropListDropped)="onDrop($event)"
+  id="noAsignadosList"
+>
+  <div *ngFor="let item of noAsignados" cdkDrag class="draggable-item">
+    {{ item.nombre }}
+  </div>
+</div>
+        </mat-card-content>
+      </mat-card>
+  
+      <!-- Card 2: Aprobados -->
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Aprobados</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div
+  cdkDropList
+  [cdkDropListData]="aprobados"
+  [cdkDropListConnectedTo]="['noAsignadosList']"
+  class="drop-list"
+  (cdkDropListDropped)="onDrop($event)"
+  id="aprobadosList"
+>
+  <div *ngFor="let item of aprobados" cdkDrag class="draggable-item">
+    {{ item.nombre }}
+  </div>
+</div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  
