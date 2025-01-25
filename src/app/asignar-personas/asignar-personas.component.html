@@ -1,62 +1,104 @@
 <div mat-dialog-content>
-    <div class="modal-container">
-      <!-- Card 1: No aprobados -->
-      <mat-card>
+  <div class="modal-container">
+
+    <!-- Información del Proyecto -->
+    <div class="top-card">
+      <mat-card class="left-card">
         <mat-card-header>
-          <mat-card-title>Lista</mat-card-title>
-          <mat-card-subtitle>
-            <div class="button-group">
-              <button 
-                mat-button 
-                (click)="selectedType = 'supervisores'; filterList()" 
-                [class.selected]="selectedType === 'supervisores'">
-                Supervisores
-              </button>
-              <button 
-                mat-button 
-                (click)="selectedType = 'fiscales'; filterList()" 
-                [class.selected]="selectedType === 'fiscales'">
-                Fiscales
-              </button>
-            </div>
-          </mat-card-subtitle>
+          <mat-card-title>Información del Proyecto</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-            <div
-  cdkDropList
-  [cdkDropListData]="noAsignados"
-  [cdkDropListConnectedTo]="['aprobadosList']"
-  class="drop-list"
-  (cdkDropListDropped)="onDrop($event)"
-  id="noAsignadosList"
->
-  <div *ngFor="let item of noAsignados" cdkDrag class="draggable-item">
-    {{ item.nombre }}
-  </div>
-</div>
+          <div class="info-grid">
+            <div class="info-item">
+              <p><strong>Código:</strong> {{ data.codigo }}</p>
+            </div>
+            <div class="info-item">
+              <p><strong>Nombre de Carpeta:</strong> {{ data.nombreCarpeta }}</p>
+            </div>
+            <div class="info-item">
+              <p><strong>Presupuesto:</strong> {{ data.presupuesto }}</p>
+            </div>
+            <div class="info-item">
+              <p><strong>Unidad Ejecutora:</strong> {{ data.unidadEjecutora }}</p>
+            </div>
+            <div class="info-item">
+              <p><strong>Fecha de Validación:</strong> {{ data.fechaValidacion }}</p>
+            </div>
+            <div class="info-item">
+              <p><strong>Duración:</strong> {{ data.duracion }}</p>
+            </div>
+          </div>
         </mat-card-content>
       </mat-card>
-  
-      <!-- Card 2: Aprobados -->
-      <mat-card>
+    </div>
+
+    <!-- Listas de arrastrar y soltar -->
+    <div class="bottom-cards">
+      <!-- Lista izquierda -->
+      <mat-card class="right-card">
         <mat-card-header>
-          <mat-card-title>Aprobados</mat-card-title>
+          <div class="card-title-with-search">
+            <span>{{ selectedType === 'supervisores' ? 'Supervisores No Asignados' : 'Fiscales No Asignados' }}</span>
+            <mat-form-field appearance="outline" class="search-input">
+              <mat-label>Buscar</mat-label>
+              <input
+                matInput
+                (input)="updateSearchNoAsignados($event)"
+                placeholder="Buscar por nombre"
+              />
+            </mat-form-field>
+          </div>
         </mat-card-header>
         <mat-card-content>
-            <div
-  cdkDropList
-  [cdkDropListData]="aprobados"
-  [cdkDropListConnectedTo]="['noAsignadosList']"
-  class="drop-list"
-  (cdkDropListDropped)="onDrop($event)"
-  id="aprobadosList"
->
-  <div *ngFor="let item of aprobados" cdkDrag class="draggable-item">
-    {{ item.nombre }}
-  </div>
-</div>
+          <div
+            cdkDropList
+            id="noAsignadosList"
+            [cdkDropListData]="noAsignados"
+            (cdkDropListDropped)="onDrop($event)"
+            class="custom-drop-list"
+          >
+            <div *ngFor="let item of filteredNoAsignados" cdkDrag class="custom-drag-item">
+              {{ item.nombre }}
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Lista derecha -->
+      <mat-card class="center-card">
+        <mat-card-header>
+          <div class="card-title-with-search">
+            <span>{{ selectedType === 'supervisores' ? 'Supervisores Asignados' : 'Fiscales Asignados' }}</span>
+            <mat-form-field appearance="outline" class="search-input">
+              <mat-label>Buscar</mat-label>
+              <input
+                matInput
+                (input)="updateSearchAprobados($event)"
+                placeholder="Buscar por nombre"
+              />
+            </mat-form-field>
+          </div>
+        </mat-card-header>
+        <mat-card-content>
+          <div
+            cdkDropList
+            id="aprobadosList"
+            [cdkDropListData]="aprobados"
+            (cdkDropListDropped)="onDrop($event)"
+            class="custom-drop-list"
+          >
+            <div *ngFor="let item of filteredAprobados" cdkDrag class="custom-drag-item">
+              {{ item.nombre }}
+            </div>
+          </div>
         </mat-card-content>
       </mat-card>
     </div>
   </div>
-  
+</div>
+
+<!-- Botones de acción -->
+<mat-dialog-actions>
+  <button mat-button class="red-button" (click)="onCancel()">Cancelar</button>
+  <button mat-raised-button class="turquoise-button" (click)="onConfirm()">Confirmar</button>
+</mat-dialog-actions>

@@ -13,3 +13,49 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background: rgba(0, 0, 0, 0.5); /* Fondo oscuro translúcido */
   }
   
+  .custom-modal .mat-dialog-container {
+    max-width: 90vw; /* Asegura que no exceda el 90% del ancho */
+    max-height: 70vh; /* Limita el alto del modal */
+    overflow: hidden; /* Evita que se muestren barras de desplazamiento */
+    box-sizing: border-box;
+  }
+  
+  .custom-modal .mat-card-content {
+    width: 100vw !important;
+  height: 100vh !important;
+  margin: 0; /* Elimina márgenes externos */
+  border-radius: 0; /* Elimina bordes redondeados */
+  padding: 0; /* Elimina relleno interno */
+  padding: 0; /* Elimina relleno interno */
+  display: flex;
+  flex-direction: column; /* Asegura que los elementos se apilen verticalmente */
+  border-top: 1px solid #ccc; /* Opcional: separador entre contenido y botones */
+  }
+  
+
+  .mat-dialog-actions .red-button {
+    color: white;
+    background-color: var(--mat-red-500); /* Rojo primario */
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .mat-dialog-actions .red-button:hover {
+    background-color: var(--mat-red-700); /* Rojo más oscuro */
+  }
+  
+  .mat-dialog-actions .turquoise-button {
+    color: white;
+    background-color: var(--mat-teal-400); /* Turquesa */
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .mat-dialog-actions .turquoise-button:hover {
+    background-color: var(--mat-teal-600); /* Turquesa más oscuro */
+  }
+  

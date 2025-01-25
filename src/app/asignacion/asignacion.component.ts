@@ -70,10 +70,24 @@ export class AsignacionComponent {
     });
   }
 
-  openModalA() {
+  openModalA(row: any) {
     const dialogRef = this.dialog.open(AsignarPersonasComponent, {
-      width: '600px',
-      height: '500px',
+      width: '100vw', // Ocupa el 90% del ancho de la ventana
+      height: '70vw', // Ocupa el 90% del alto de la ventana
+      maxWidth: '90vw',
+      maxHeight: '70vh', // Define un tamaño máximo
+      //panelClass: 'full-screen-modal',
+      panelClass: 'custom-modal', // Clase CSS personalizada
+      data: { 
+        proyectoId: row.codigo,// Pasa el código como identificador único del proyecto
+        codigo: row.codigo, // Código del proyecto
+        nombreCarpeta: row.nombreCarpeta, // Nombre de la carpeta
+        presupuesto: row.presupuesto, // Presupuesto del proyecto
+        unidadEjecutora: row.unidadEjecutora, // Unidad ejecutora
+        fechaValidacion: row.fechaValidacion, // Fecha de validación
+        duracion: row.duracion
+      }, 
+    
     });
   
     dialogRef.afterClosed().subscribe(result => {

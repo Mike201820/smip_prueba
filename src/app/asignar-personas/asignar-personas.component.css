@@ -1,61 +1,469 @@
 .modal-container {
-    display: flex;
-    gap: 16px;
-  }
-  
-  mat-card {
-    flex: 1;
-    max-height: 400px;
-    overflow-y: auto;
-  }
-  
-  .drop-list {
-    min-height: 200px;
-    border: 1px solid #ccc;
-    padding: 10px;
-    background-color: #f9f9f9;
-    border-radius: 4px;
-  }
-  .draggable-item {
-    margin: 5px;
-    padding: 10px;
-    background-color: #e0e0e0;
-    border-radius: 4px;
-    cursor: move;
-    transition: background-color 0.3s ease;
-  }
-  
-  .draggable-item.cdk-drag-preview {
-    background-color: #c1e3ff;
-  }
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 2px; /* Reduce el espacio interno del modal */
+  margin: 0; /* Elimina cualquier espacio externo innecesario */
+}
+
+.top-card {
+  margin: 1px;
+  /* Reduce el espacio alrededor del card */
+  padding: 0;
+  /* Asegúrate de que no haya espacio interno adicional */
+  flex: 0 0 auto;
+  /* Tamaño fijo para el card superior */
+  width: 100%;
+  /* Ocupa todo el ancho */
+}
+
+.bottom-cards {
+  display: flex;
+  flex-direction: row;
+  /* Los cards del centro y derecha estarán uno al lado del otro */
+  flex: 1;
+  /* Ocupa el resto del espacio vertical */
+  gap: 16px; /* Espaciado entre los cards */
+  height: 100%; 
+}
+
+mat-card {
+  display: flex;
+  flex: 1;
+  max-height: 400px;
+  overflow-y: auto;
+  flex-direction: column;
+  justify-content: space-between;
+  /* Distribuye el contenido internamente */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* Asegura que el padding no afecte el tamaño total */
+}
+
+.drop-list {
+  min-height: 200px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+}
+
+.draggable-item {
+  margin: 5px;
+  padding: 10px;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  cursor: move;
+  transition: background-color 0.3s ease;
+}
+
+.draggable-item.cdk-drag-preview {
+  background-color: #c1e3ff;
+}
 
 
-  .button-group {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  button {
-    flex: 1;
-    padding: 8px;
-    font-size: 16px;
-    text-align: center;
-    border-radius: 4px;
-    margin: 0 5px;
-    transition: background-color 0.3s, color 0.3s; /* Transición suave */
-  }
-  
-  button.selected {
-    background-color: #007bff; /* Color de fondo cuando está seleccionado */
-    color: white; /* Color del texto cuando está seleccionado */
-    border: 2px solid #0056b3; /* Borde más oscuro para remarcar el botón */
-  }
-  
-  button:hover {
-    background-color: #f1f1f1; /* Color de fondo al pasar el ratón */
-  }
-  
-  button:focus {
-    outline: none;
-  }
-  
+.button-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  flex: 1;
+  padding: 8px;
+  font-size: 16px;
+  text-align: center;
+  border-radius: 4px;
+  margin: 0 5px;
+  transition: background-color 0.3s, color 0.3s;
+  /* Transición suave */
+}
+
+button.selected {
+  background-color: #007bff;
+  /* Color de fondo cuando está seleccionado */
+  color: white;
+  /* Color del texto cuando está seleccionado */
+  border: 2px solid #0056b3;
+  /* Borde más oscuro para remarcar el botón */
+}
+
+button:hover {
+  background-color: #f1f1f1;
+  /* Color de fondo al pasar el ratón */
+}
+
+button:focus {
+  outline: none;
+}
+
+
+.drop-list.drop-active {
+  border: 2px dashed #007bff;
+  background-color: #e8f4ff;
+}
+
+.empty-slot {
+  padding: 10px;
+  text-align: center;
+  color: #aaa;
+  font-style: italic;
+}
+
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  /* Alinea los botones a la derecha */
+  gap: 16px;
+  /* Espacio entre los botones */
+  margin-top: 20px;
+  /* Separación respecto al contenido */
+}
+
+.draggable-item {
+  display: flex;
+  align-items: center;
+}
+
+.position {
+  margin-right: 8px;
+  font-weight: bold;
+  color: #555;
+  width: 20px;
+  text-align: center;
+}
+
+.info-card {
+  flex: 1;
+  max-width: 30%;
+  min-width: 250px;
+  background-color: #f5f5f5;
+}
+
+.assignation-content {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.left-card {
+  flex: 1;
+  max-height: 100%;
+  background-color: #f5f5f5;
+  padding: 1rem;
+  overflow: auto;
+  /* Solo desplaza si es necesario */
+}
+
+.center-card,
+.right-card {
+  /*display: flex;
+    flex-direction: column;
+    justify-content: flex-start;  Alinea el contenido en la parte superior 
+    align-items: stretch;  Asegura que ambos cards tengan la misma anchura 
+    margin: 0;  Elimina cualquier margen que pueda causar desalineación 
+    padding: 1rem; /* Uniforma el espaciado interno 
+    width: 35%; /* Ajusta la anchura para que ambos cards tengan el mismo tamaño 
+    height: auto; /* Ajusta la altura según el contenido */
+  flex: 1;
+  margin: 0 8px;
+  padding: 1rem;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: auto;
+  height: 100%;
+  /* Mantén altura consistente */
+}
+
+.center-card {
+  flex: 0 0 65%; /* Ocupa el 35% del ancho */
+  max-width: 65%; /* Máximo ancho también del 35% */
+  padding: 8px; /* Ajusta el espaciado interno */
+  box-sizing: border-box; /* Incluye el padding en el tamaño total */
+}
+
+.right-card {
+  flex: 0 0 35%; /* Ocupa el 65% del ancho */
+  max-width: 35%; /* Máximo ancho también del 65% */
+  padding: 8px; /* Ajusta el espaciado interno */
+  box-sizing: border-box; /* Incluye el padding en el tamaño total */
+}
+
+.left-card,
+.center-card,
+.right-card {
+  height: 100%;
+  /* Asegura que los cards se expandan verticalmente */
+}
+
+.card {
+  flex: 1;
+  /* Cada card ocupa el 50% vertical */
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  height: auto;
+  /* Ajusta según el contenido */
+  max-height: calc(90vh - 4rem);
+  /* Máximo alto con espacio para el modal */
+  overflow: auto;
+  /* Desplazamiento si el contenido excede el alto máximo */
+}
+
+.list {
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 10px;
+  border: 1px dashed #ccc;
+  border-radius: 4px;
+}
+
+.list-item {
+  padding: 8px;
+  margin-bottom: 4px;
+  background-color: #e0f7fa;
+  border-radius: 4px;
+  cursor: grab;
+}
+
+.list-item:active {
+  cursor: grabbing;
+}
+
+.full-screen-modal {
+  display: flex;
+  flex-direction: row;
+  /* Cards en fila: nuevo card y cards de arrastre */
+  height: auto;
+  /* Altura automática */
+  max-height: 90vh;
+  /* Altura máxima del modal */
+  overflow: hidden;
+  /* Evita que el contenido se desborde */
+  align-items: flex-start;
+  /* Alinea los cards en la parte superior */
+  justify-content: space-between;
+  /* Espacia los cards uniformemente */
+  gap: 16px;
+  max-width: 90vw;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.button-group button {
+  flex: 1;
+  margin: 0 0.5rem;
+}
+
+.button-group button.active {
+  background-color: #1976d2;
+  color: white;
+}
+
+
+.btn {
+  padding: 10px 20px;
+  margin: 5px;
+  border: 1px solid #ccc;
+  background-color: #f0f0f0;
+  color: #000;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #e0e0e0;
+}
+
+.active-btn {
+  background-color: #007bff;
+  color: #fff;
+  border-color: #007bff;
+}
+
+mat-card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Centra los elementos en el encabezado */
+  justify-content: center;
+}
+
+mat-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  /* Espaciado entre elementos dentro del card */
+  overflow-y: auto;
+  /* Habilita scroll interno si hay desbordamiento */
+  max-height: 500px;
+  /* Ajusta según el espacio disponible calc(100% - 20px); */
+  box-sizing: border-box;
+  /* Asegura que el padding no cause desbordamiento */
+  overflow: auto;
+  /* Permite desplazamiento solo si es estrictamente necesario */
+  padding: 8px;
+  /* Espaciado interno */
+}
+
+button.btn {
+  margin: 0 4px;
+  /* Espaciado entre botones */
+}
+
+.active-btn {
+  background-color: #1976d2;
+  color: white;
+}
+
+.empty-slot {
+  color: #757575;
+  font-style: italic;
+}
+
+mat-icon {
+  margin-left: 8px;
+  color: #ff5722;
+  /* Cambia el color del ícono si lo deseas */
+  vertical-align: middle;
+  /* Asegura que esté alineado con el texto */
+}
+
+
+.red-button {
+  color: white;
+  background-color: #f44336;
+  /* Rojo */
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.red-button:hover {
+  background-color: #d32f2f;
+  /* Más oscuro al pasar el ratón */
+}
+
+.turquoise-button {
+  color: white;
+  background-color: #40e0d0;
+  /* Turquesa */
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.turquoise-button:hover {
+  background-color: #30c6b6;
+  /* Más oscuro al pasar el ratón */
+}
+
+
+/* para la cabecera */
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  /* Dos columnas iguales */
+  gap: 0.2px;
+  /* Espaciado entre las filas y columnas */
+  align-items: start;
+  /* Alinea los elementos al principio de cada celda */
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  /* Coloca etiqueta y valor en una columna */
+  gap: 0.2px;
+  /* Espacio entre el label y el valor */
+  /* border-bottom: 1px solid #ddd;
+  padding-bottom: 8px; */
+}
+
+.info-item label {
+  font-weight: bold;
+  color: #555;
+  /* Cambia el color según el diseño */
+  margin-bottom: 1px;
+}
+
+.info-item span {
+  color: #333;
+  /* Color para el valor */
+  margin: 0;
+  /* Asegura que no haya espacio adicional */
+}
+
+
+.card-title-with-search {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Espacia el título y el input */
+  gap: 16px; /* Espaciado entre el título y el input */
+}
+
+.search-input {
+  flex: 1; /* Asegura que el input ocupe el espacio restante */
+  max-width: 200px; /* Opcional: Limita el ancho máximo del input */
+}
+
+
+
+.custom-drop-list {
+  border: 2px dashed #ccc;
+  padding: 10px;
+  min-height: 100px;
+  background-color: #f9f9f9;
+}
+
+.custom-drag-item {
+  padding: 10px;
+  margin: 5px 0;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: grab;
+}
+
+.custom-drag-item:active {
+  cursor: grabbing;
+}
+
+
+
+.custom-drop-list {
+  min-height: 200px;
+  border: 1px dashed #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #f9f9f9;
+}
+
+.custom-drag-item {
+  padding: 10px;
+  margin-bottom: 5px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: grab;
+}
+
+.custom-drag-item:active {
+  cursor: grabbing;
+}
