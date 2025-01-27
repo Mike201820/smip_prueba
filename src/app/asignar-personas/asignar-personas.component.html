@@ -1,98 +1,153 @@
 <div mat-dialog-content>
   <div class="modal-container">
 
-    <!-- Información del Proyecto -->
-    <div class="top-card">
-      <mat-card class="left-card">
-        <mat-card-header>
-          <mat-card-title>Información del Proyecto</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <div class="info-grid">
-            <div class="info-item">
-              <p><strong>Código:</strong> {{ data.codigo }}</p>
-            </div>
-            <div class="info-item">
-              <p><strong>Nombre de Carpeta:</strong> {{ data.nombreCarpeta }}</p>
-            </div>
-            <div class="info-item">
-              <p><strong>Presupuesto:</strong> {{ data.presupuesto }}</p>
-            </div>
-            <div class="info-item">
-              <p><strong>Unidad Ejecutora:</strong> {{ data.unidadEjecutora }}</p>
-            </div>
-            <div class="info-item">
-              <p><strong>Fecha de Validación:</strong> {{ data.fechaValidacion }}</p>
-            </div>
-            <div class="info-item">
-              <p><strong>Duración:</strong> {{ data.duracion }}</p>
-            </div>
-          </div>
-        </mat-card-content>
-      </mat-card>
+    <!-- Top Card (Información del Proyecto) -->
+    <!-- Top Card (Información del Proyecto) -->
+<mat-card class="top-card">
+  <mat-card-header>
+    <mat-card-title>Información del Proyecto</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="info-grid">
+      <!-- Columna 1 -->
+      <div class="info-column">
+        <p><strong>Código:</strong> {{ data.codigo }}</p>
+        <p><strong>Nombre de Carpeta:</strong> {{ data.nombreCarpeta }}</p>
+        <p><strong>Presupuesto:</strong> {{ data.presupuesto }}</p>
+      </div>
+      <!-- Columna 2 -->
+      <div class="info-column">
+        <p><strong>Unidad Ejecutora:</strong> {{ data.unidadEjecutora }}</p>
+        <p><strong>Fecha de Validación:</strong> {{ data.fechaValidacion }}</p>
+        <p><strong>Duración:</strong> {{ data.duracion }}</p>
+      </div>
     </div>
+  </mat-card-content>
+</mat-card>
 
-    <!-- Listas de arrastrar y soltar -->
+
+    <!-- Bottom Cards (Listas de arrastrar y soltar) -->
     <div class="bottom-cards">
-      <!-- Lista izquierda -->
-      <mat-card class="right-card">
-        <mat-card-header>
-          <div class="card-title-with-search">
-            <span>{{ selectedType === 'supervisores' ? 'Supervisores No Asignados' : 'Fiscales No Asignados' }}</span>
-            <mat-form-field appearance="outline" class="search-input">
-              <mat-label>Buscar</mat-label>
-              <input
-                matInput
-                (input)="updateSearchNoAsignados($event)"
-                placeholder="Buscar por nombre"
-              />
-            </mat-form-field>
-          </div>
-        </mat-card-header>
-        <mat-card-content>
-          <div
-            cdkDropList
-            id="noAsignadosList"
-            [cdkDropListData]="noAsignados"
-            (cdkDropListDropped)="onDrop($event)"
-            class="custom-drop-list"
-          >
-            <div *ngFor="let item of filteredNoAsignados" cdkDrag class="custom-drag-item">
-              {{ item.nombre }}
-            </div>
-          </div>
-        </mat-card-content>
-      </mat-card>
+      
+      <!-- Left Card (Supervisores/Fiscales No Asignados) -->
+     <!-- Left Card -->
+     <mat-card
+     class="left-card"
+     [ngClass]="borderClass"
+     [class.blue-border]="selectedType === 'supervisores'"
+     [class.red-border]="selectedType === 'fiscales'"
+   >
+     <mat-card-header>
+       <div class="tab-container">
+         <!-- Tab Supervisores -->
+         <button
+           class="custom-tab"
+           [class.active-blue]="activeTab === 'supervisores'"
+           [class.inactive-red]="activeTab !== 'supervisores'"
+           (click)="setSelectedType('supervisores')"
+         >
+           SUPERVISORES
+         </button>
+   
+         <!-- Tab Fiscales -->
+         <button
+           class="custom-tab"
+           [class.active-red]="activeTab === 'fiscales'"
+           [class.inactive-blue]="activeTab !== 'fiscales'"
+           (click)="setSelectedType('fiscales')"
+         >
+           FISCALES
+         </button>
+       </div>
+     </mat-card-header>
+     <mat-card-title class="title-centered">ASIGNADOS</mat-card-title>
+     <div class="search-container">
+       <input
+         id="searchInput"
+         type="text"
+         [(ngModel)]="searchQueryNoAsignados"
+         (input)="onSearchNoAsignados($event)"
+         (focus)="onFocus()"
+         (blur)="onBlur()"
+         placeholder="Escribe para buscar..."
+         [ngStyle]="{
+           'border': isFocused ? (activeTab === 'supervisores' ? '2px solid blue' : '2px solid red') : 'none'
+         }"
+       />
+     </div>
+     <mat-card-content>
+       <div
+         cdkDropList
+         id="noAsignadosList"
+         [cdkDropListData]="filteredNoAsignados2"
+         (cdkDropListDropped)="onDrop($event)"
+         class="custom-drop-list"
+       >
+         <div *ngFor="let item of filteredNoAsignados2" cdkDrag class="custom-drag-item">
+           {{ item.nombre }}
+         </div>
+       </div>
+     </mat-card-content>
+   </mat-card>
+   
 
-      <!-- Lista derecha -->
-      <mat-card class="center-card">
+      <!-- Right Card (Supervisores/Fiscales Asignados) -->
+      <mat-card class="card-right" [ngClass]="{'supervisores-border': activeTab === 'supervisores', 'fiscales-border': activeTab === 'fiscales'}">
         <mat-card-header>
-          <div class="card-title-with-search">
-            <span>{{ selectedType === 'supervisores' ? 'Supervisores Asignados' : 'Fiscales Asignados' }}</span>
-            <mat-form-field appearance="outline" class="search-input">
-              <mat-label>Buscar</mat-label>
-              <input
-                matInput
-                (input)="updateSearchAprobados($event)"
-                placeholder="Buscar por nombre"
-              />
-            </mat-form-field>
+          <div class="tab-container">
+            <!-- Tab Supervisores -->
+            <button
+              class="custom-tab"
+              [class.active-blue]="activeTab === 'supervisores'"
+              [class.inactive-red]="activeTab !== 'supervisores'"
+              (click)="activeTab = 'supervisores'; selectedType = 'supervisores'"
+            >
+              SUPERVISORES
+            </button>
+      
+            <!-- Tab Fiscales -->
+            <button
+              class="custom-tab"
+              [class.active-red]="activeTab === 'fiscales'"
+              [class.inactive-blue]="activeTab !== 'fiscales'"
+              (click)="activeTab = 'fiscales'; selectedType = 'fiscales'"
+            >
+              FISCALES
+            </button>
           </div>
         </mat-card-header>
+        <mat-card-title class="title-centered">DESIGNADOS</mat-card-title>
+        <div class="search-container">
+          <input
+            id="searchInputDerecha"
+            type="text"
+            [(ngModel)]="searchQueryAprobadosDerecha"
+            (input)="onSearchAprobadosDerecha($event)"
+            (focus)="onFocus()"
+            (blur)="onBlur()"
+            placeholder="Buscar..."
+            [ngClass]="{'supervisores-border': activeTab === 'supervisores', 'fiscales-border': activeTab === 'fiscales'}"
+            class="input-field"
+          />
+        </div>
         <mat-card-content>
-          <div
-            cdkDropList
-            id="aprobadosList"
-            [cdkDropListData]="aprobados"
-            (cdkDropListDropped)="onDrop($event)"
-            class="custom-drop-list"
-          >
-            <div *ngFor="let item of filteredAprobados" cdkDrag class="custom-drag-item">
-              {{ item.nombre }}
+          <!-- Lista de Supervisores Aprobados -->
+          <div cdkDropList id="aprobadosListDerecha" [cdkDropListData]="aprobadosSupervisoresDerecha" (cdkDropListDropped)="onDrop($event)">
+            <div *ngFor="let item of aprobadosSupervisoresDerecha" class="item">
+              <div>{{ item.nombre }}</div>
+            </div>
+          </div>
+      
+          <!-- Lista de Fiscales Aprobados -->
+          <div cdkDropList id="aprobadosFiscalesListDerecha" [cdkDropListData]="aprobadosFiscalesDerecha" (cdkDropListDropped)="onDrop($event)">
+            <div *ngFor="let item of aprobadosFiscalesDerecha" class="item">
+              <div>{{ item.nombre }}</div>
             </div>
           </div>
         </mat-card-content>
       </mat-card>
+      
+      
     </div>
   </div>
 </div>

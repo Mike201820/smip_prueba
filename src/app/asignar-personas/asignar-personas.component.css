@@ -1,469 +1,366 @@
-.modal-container {
+/* Contenedor principal */
+.top {
   display: flex;
   flex-direction: column;
+  gap: 16px;
   width: 100%;
-  height: 100%;
-  padding: 2px; /* Reduce el espacio interno del modal */
-  margin: 0; /* Elimina cualquier espacio externo innecesario */
-}
-
-.top-card {
-  margin: 1px;
-  /* Reduce el espacio alrededor del card */
-  padding: 0;
-  /* Asegúrate de que no haya espacio interno adicional */
-  flex: 0 0 auto;
-  /* Tamaño fijo para el card superior */
-  width: 100%;
-  /* Ocupa todo el ancho */
-}
-
-.bottom-cards {
-  display: flex;
-  flex-direction: row;
-  /* Los cards del centro y derecha estarán uno al lado del otro */
-  flex: 1;
-  /* Ocupa el resto del espacio vertical */
-  gap: 16px; /* Espaciado entre los cards */
-  height: 100%; 
-}
-
-mat-card {
-  display: flex;
-  flex: 1;
-  max-height: 400px;
-  overflow-y: auto;
-  flex-direction: column;
-  justify-content: space-between;
-  /* Distribuye el contenido internamente */
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
-  /* Asegura que el padding no afecte el tamaño total */
 }
-
-.drop-list {
-  min-height: 200px;
-  border: 1px solid #ccc;
-  padding: 10px;
-  background-color: #f9f9f9;
-  border-radius: 4px;
-}
-
-.draggable-item {
-  margin: 5px;
-  padding: 10px;
-  background-color: #e0e0e0;
-  border-radius: 4px;
-  cursor: move;
-  transition: background-color 0.3s ease;
-}
-
-.draggable-item.cdk-drag-preview {
-  background-color: #c1e3ff;
-}
-
-
-.button-group {
-  display: flex;
-  justify-content: space-between;
-}
-
-button {
-  flex: 1;
-  padding: 8px;
-  font-size: 16px;
-  text-align: center;
-  border-radius: 4px;
-  margin: 0 5px;
-  transition: background-color 0.3s, color 0.3s;
-  /* Transición suave */
-}
-
-button.selected {
-  background-color: #007bff;
-  /* Color de fondo cuando está seleccionado */
-  color: white;
-  /* Color del texto cuando está seleccionado */
-  border: 2px solid #0056b3;
-  /* Borde más oscuro para remarcar el botón */
-}
-
-button:hover {
-  background-color: #f1f1f1;
-  /* Color de fondo al pasar el ratón */
-}
-
-button:focus {
-  outline: none;
-}
-
-
-.drop-list.drop-active {
-  border: 2px dashed #007bff;
-  background-color: #e8f4ff;
-}
-
-.empty-slot {
-  padding: 10px;
-  text-align: center;
-  color: #aaa;
-  font-style: italic;
-}
-
-
-.button-container {
-  display: flex;
-  justify-content: flex-end;
-  /* Alinea los botones a la derecha */
-  gap: 16px;
-  /* Espacio entre los botones */
-  margin-top: 20px;
-  /* Separación respecto al contenido */
-}
-
-.draggable-item {
-  display: flex;
-  align-items: center;
-}
-
-.position {
-  margin-right: 8px;
-  font-weight: bold;
-  color: #555;
-  width: 20px;
-  text-align: center;
-}
-
-.info-card {
-  flex: 1;
-  max-width: 30%;
-  min-width: 250px;
-  background-color: #f5f5f5;
-}
-
-.assignation-content {
-  flex: 2;
-  display: flex;
-  flex-direction: column;
-}
-
-.left-card {
-  flex: 1;
-  max-height: 100%;
-  background-color: #f5f5f5;
-  padding: 1rem;
-  overflow: auto;
-  /* Solo desplaza si es necesario */
-}
-
-.center-card,
-.right-card {
-  /*display: flex;
-    flex-direction: column;
-    justify-content: flex-start;  Alinea el contenido en la parte superior 
-    align-items: stretch;  Asegura que ambos cards tengan la misma anchura 
-    margin: 0;  Elimina cualquier margen que pueda causar desalineación 
-    padding: 1rem; /* Uniforma el espaciado interno 
-    width: 35%; /* Ajusta la anchura para que ambos cards tengan el mismo tamaño 
-    height: auto; /* Ajusta la altura según el contenido */
-  flex: 1;
-  margin: 0 8px;
-  padding: 1rem;
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  overflow: auto;
-  height: 100%;
-  /* Mantén altura consistente */
-}
-
-.center-card {
-  flex: 0 0 65%; /* Ocupa el 35% del ancho */
-  max-width: 65%; /* Máximo ancho también del 35% */
-  padding: 8px; /* Ajusta el espaciado interno */
-  box-sizing: border-box; /* Incluye el padding en el tamaño total */
-}
-
-.right-card {
-  flex: 0 0 35%; /* Ocupa el 65% del ancho */
-  max-width: 35%; /* Máximo ancho también del 65% */
-  padding: 8px; /* Ajusta el espaciado interno */
-  box-sizing: border-box; /* Incluye el padding en el tamaño total */
-}
-
-.left-card,
-.center-card,
-.right-card {
-  height: 100%;
-  /* Asegura que los cards se expandan verticalmente */
-}
-
-.card {
-  flex: 1;
-  /* Cada card ocupa el 50% vertical */
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-  height: auto;
-  /* Ajusta según el contenido */
-  max-height: calc(90vh - 4rem);
-  /* Máximo alto con espacio para el modal */
-  overflow: auto;
-  /* Desplazamiento si el contenido excede el alto máximo */
-}
-
-.list {
-  max-height: 300px;
-  overflow-y: auto;
-  padding: 10px;
-  border: 1px dashed #ccc;
-  border-radius: 4px;
-}
-
-.list-item {
-  padding: 8px;
-  margin-bottom: 4px;
-  background-color: #e0f7fa;
-  border-radius: 4px;
-  cursor: grab;
-}
-
-.list-item:active {
-  cursor: grabbing;
-}
-
-.full-screen-modal {
-  display: flex;
+.bottom-cards {
+  display: flex; /* Habilita el comportamiento en filas */
   flex-direction: row;
-  /* Cards en fila: nuevo card y cards de arrastre */
-  height: auto;
-  /* Altura automática */
-  max-height: 90vh;
-  /* Altura máxima del modal */
-  overflow: hidden;
-  /* Evita que el contenido se desborde */
-  align-items: flex-start;
-  /* Alinea los cards en la parte superior */
-  justify-content: space-between;
-  /* Espacia los cards uniformemente */
-  gap: 16px;
-  max-width: 90vw;
+  gap: 16px; /* Espacio entre las tarjetas */
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.button-group {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 1rem;
+/* Contenedor principal de la tarjeta */
+.top-card {
+  width: 100%; /* Ocupa todo el ancho */
+  background-color: #f5f5f5; /* Fondo claro */
+  border-radius: 8px; /* Bordes redondeados */
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  box-sizing: border-box;
+  margin-bottom: 16px; /* Separación inferior */
 }
 
-.button-group button {
-  flex: 1;
-  margin: 0 0.5rem;
+/* Estilo del encabezado */
+mat-card-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #a05757;
+  margin-bottom: 16px; /* Separación del contenido */
+  justify-content: center;/* Alinea el contenido al inicio de las filas */
+
 }
 
-.button-group button.active {
-  background-color: #1976d2;
-  color: white;
+/* Contenedor para las columnas */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columnas de igual ancho */
+  gap: 8px 16px; /* 8px entre filas, 16px entre columnas */
+  align-items: start; /* Alinea el contenido al inicio de las filas */
 }
 
-
-.btn {
-  padding: 10px 20px;
-  margin: 5px;
-  border: 1px solid #ccc;
-  background-color: #f0f0f0;
-  color: #000;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: all 0.3s ease;
-}
-
-.btn:hover {
-  background-color: #e0e0e0;
-}
-
-.active-btn {
-  background-color: #007bff;
-  color: #fff;
-  border-color: #007bff;
-}
-
-mat-card-header {
+/* Estilo para cada columna */
+.info-column {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  /* Centra los elementos en el encabezado */
-  justify-content: center;
+  gap: 4px; /* Espacio reducido entre filas dentro de cada columna */
 }
 
-mat-card-content {
+/* Estilo para los textos */
+.info-column p {
+  margin: 0; /* Eliminar márgenes */
+  font-size: 14px; /* Tamaño ajustado del texto */
+  line-height: 1.4; /* Espaciado compacto entre líneas */
+  color: #333; /* Color del texto */
+}
+
+/* Estilo para los textos en negrita */
+.info-column p strong {
+  font-weight: bold;
+  color: #000; /* Color ligeramente más oscuro */
+}
+
+/* Left Card */
+.left-card {
+  flex: 0 0 30%;
+  background-color: #ffffff;
+  border: 2px solid transparent; /* Dinámico con ngClass */
+  border-radius: 8px;
+  padding: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+/* Right Card */
+.custom-border {
+  flex: 0 0 70%;
+  background-color: #ffffff;
+  border: 2px solid #3f51b5;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+/* Dinámicos para borde */
+.left-card.blue-border {
+  border: 2px solid #1976d2 !important; /* Azul */
+  transition: border-color 0.3s ease; /* Transición suave */
+}
+
+.left-card.red-border {
+  border: 2px solid #d32f2f !important; /* Rojo */
+  transition: border-color 0.3s ease; /* Transición suave */
+}
+
+/* Tabs container */
+.tab-container {
+  display: flex;               /* Alinea los botones en una fila */
+  justify-content: center; /* Alinea a la izquierda */
+  gap: 4px;                    /* Espacio entre los botones */
+  align-items: center;         /* Alineación vertical centrada */
+  padding: 8px 16px;           /* Relleno alrededor de los botones */
+  background-color: #f6f1f1;   /* Fondo gris claro */
+  border-radius: 8px 8px 0 0;  /* Bordes redondeados solo en la parte superior */
+}
+
+/* Tab genérico */
+.tab {
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: #e0e0e0; /* Fondo por defecto */
+  color: #333; /* Texto gris oscuro */
+}
+
+/* Tab activo */
+.tab.active {
+  background-color: #1976d2; /* Fondo dinámico para Supervisores */
+  color: #ffffff;
+}
+
+.tab.active.red {
+  background-color: #d32f2f; /* Fondo dinámico para Fiscales */
+  color: #ffffff;
+}
+
+/* Hover en tabs inactivos */
+.tab:not(.active):hover {
+  background-color: #c4c4c4;
+}
+
+/* Drag and Drop estilos */
+.custom-drop-list {
+  min-height: 200px;
+  background-color: #f9f9f9;
+  border: 1px dashed #ccc;
+  border-radius: 8px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 8px;
-  /* Espaciado entre elementos dentro del card */
-  overflow-y: auto;
-  /* Habilita scroll interno si hay desbordamiento */
-  max-height: 500px;
-  /* Ajusta según el espacio disponible calc(100% - 20px); */
-  box-sizing: border-box;
-  /* Asegura que el padding no cause desbordamiento */
-  overflow: auto;
-  /* Permite desplazamiento solo si es estrictamente necesario */
-  padding: 8px;
-  /* Espaciado interno */
-}
-
-button.btn {
-  margin: 0 4px;
-  /* Espaciado entre botones */
-}
-
-.active-btn {
-  background-color: #1976d2;
-  color: white;
-}
-
-.empty-slot {
-  color: #757575;
-  font-style: italic;
-}
-
-mat-icon {
-  margin-left: 8px;
-  color: #ff5722;
-  /* Cambia el color del ícono si lo deseas */
-  vertical-align: middle;
-  /* Asegura que esté alineado con el texto */
-}
-
-
-.red-button {
-  color: white;
-  background-color: #f44336;
-  /* Rojo */
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  text-transform: uppercase;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-}
-
-.red-button:hover {
-  background-color: #d32f2f;
-  /* Más oscuro al pasar el ratón */
-}
-
-.turquoise-button {
-  color: white;
-  background-color: #40e0d0;
-  /* Turquesa */
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  text-transform: uppercase;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-}
-
-.turquoise-button:hover {
-  background-color: #30c6b6;
-  /* Más oscuro al pasar el ratón */
-}
-
-
-/* para la cabecera */
-.info-grid {
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  /* Dos columnas iguales */
-  gap: 0.2px;
-  /* Espaciado entre las filas y columnas */
-  align-items: start;
-  /* Alinea los elementos al principio de cada celda */
-}
-
-.info-item {
-  display: flex;
-  flex-direction: column;
-  /* Coloca etiqueta y valor en una columna */
-  gap: 0.2px;
-  /* Espacio entre el label y el valor */
-  /* border-bottom: 1px solid #ddd;
-  padding-bottom: 8px; */
-}
-
-.info-item label {
-  font-weight: bold;
-  color: #555;
-  /* Cambia el color según el diseño */
-  margin-bottom: 1px;
-}
-
-.info-item span {
-  color: #333;
-  /* Color para el valor */
-  margin: 0;
-  /* Asegura que no haya espacio adicional */
-}
-
-
-.card-title-with-search {
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* Espacia el título y el input */
-  gap: 16px; /* Espaciado entre el título y el input */
-}
-
-.search-input {
-  flex: 1; /* Asegura que el input ocupe el espacio restante */
-  max-width: 200px; /* Opcional: Limita el ancho máximo del input */
-}
-
-
-
-.custom-drop-list {
-  border: 2px dashed #ccc;
-  padding: 10px;
-  min-height: 100px;
-  background-color: #f9f9f9;
 }
 
 .custom-drag-item {
-  padding: 10px;
-  margin: 5px 0;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  cursor: grab;
-}
-
-.custom-drag-item:active {
-  cursor: grabbing;
-}
-
-
-
-.custom-drop-list {
-  min-height: 200px;
-  border: 1px dashed #ccc;
-  border-radius: 5px;
-  padding: 10px;
-  background-color: #f9f9f9;
-}
-
-.custom-drag-item {
-  padding: 10px;
-  margin-bottom: 5px;
+  padding: 8px 12px;
   background-color: #ffffff;
   border: 1px solid #ddd;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: grab;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-.custom-drag-item:active {
-  cursor: grabbing;
+/* Contenedor de los botones */
+.tab-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+/* Botón general */
+.custom-tab {
+  font-size: 16px; /* Aumentar el tamaño del texto */
+  padding: 8px 16px;               /* Espaciado alrededor del texto */
+  border-radius: 8px;              /* Bordes redondeados */
+  cursor: pointer;                 /* Aparece como clickeable */
+  font-weight: bold;               /* Texto en negrita */
+  background-color: #f5f5f5;      /* Fondo claro por defecto */
+  color: #333;                     /* Texto gris oscuro */
+  border: none;                    /* Eliminar borde por defecto */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave */
+}
+.custom-tab.selected {
+  font-size: 16px; /* Tamaño del texto cuando está seleccionado */
+  padding: 15px 30px; /* Mayor tamaño de padding */
+  transform: scale(1.1); /* Un ligero agrandamiento */
+}
+
+/* Botón activo (azul) */
+.custom-tab.active-blue {
+  background-color: #1976d2; /* Fondo azul */
+  color: #fff; /* Texto blanco */
+  border-color: #1976d2; /* Borde azul */
+  font-weight: bold;
+}
+
+/* Botón activo (rojo) */
+.custom-tab.active-red {
+  background-color: #d32f2f; /* Fondo rojo */
+  color: #fff; /* Texto blanco */
+  border-color: #d32f2f; /* Borde rojo */
+  font-weight: bold;
+}
+
+/* Botón inactivo (gris claro) */
+.custom-tab.inactive-red {
+  background-color: #5ba5ef; /* Fondo azul */
+  color: #fff; /* Texto blanco */
+  border-color: #5ba5ef; /* Borde azul */
+}
+
+/* Botón inactivo (gris claro) */
+.custom-tab.inactive-blue {
+  background-color: #ea6d6d; /* Fondo rojo */
+  color: #fff; /* Texto blanco */
+  border-color: #ea6d6d; /* Borde rojo */
+}
+
+
+/* Borde azul para Supervisores */
+.top-card.blue-border {
+  border-color: #1976d2; /* Azul */
+}
+
+/* Borde rojo para Fiscales */
+.top-card.red-border {
+  border-color: #d32f2f; /* Rojo */
+}
+
+
+
+/* Borde superior azul cuando el card está en Supervisores */
+.left-card.blue-border {
+  border-top: 4px solid #1976d2; /* Azul */
+}
+
+/* Borde superior rojo cuando el card está en Fiscales */
+.left-card.red-border {
+  border-top: 4px solid #d32f2f; /* Rojo */
+}
+
+/* Líneas en el contenido del card */
+.left-card.blue-border .mat-card-content {
+  border-top: 2px solid #1976d2; /* Azul en el contenido */
+}
+
+.left-card.red-border .mat-card-content {
+  border-top: 2px solid #d32f2f; /* Rojo en el contenido */
+}
+
+/* Cambios de domingo */
+/* Centrar el título/subtítulo */
+.title-centered {
+  text-align: center;
+  font-size: 20px; /* Tamaño del subtítulo */
+  font-weight: bold;
+  color: #333; /* Color del texto */
+  margin: 8px 0; /* Espaciado vertical */
+}
+
+/* Contenedor del buscador */
+.search-container {
+  display: flex;
+  justify-content: center; /* Centra el contenido horizontalmente */
+  align-items: center; 
+  width: 100%;
+  
+}
+
+.search-container input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 4px;
+  border: 2px solid transparent;
+  font-size: 16px;
+  background-color: #fff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Suaviza transición */
+}
+
+.search-container input:focus {
+  outline: none;
+  border-color: #3f51b5; /* El color predeterminado de Material Design */
+  box-shadow: 0 0 5px rgba(63, 81, 181, 0.3); /* Efecto de sombra cuando está enfocado */
+}
+
+.supervisores-border {
+  border: 2px solid blue;
+}
+
+.fiscales-border {
+  border: 2px solid red;
+}
+
+label {
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  font-size: 14px;
+  color: #757575;
+  transition: all 0.2s ease-in-out;
+}
+
+.search-container input:focus + label,
+.search-container input:not(:placeholder-shown) + label {
+  top: -20px;
+  font-size: 12px;
+  color: #3f51b5; /* Azul Material Design */
+}
+/* Estilo del input de búsqueda */
+.search-input {
+  width: 100%; /* Ocupa todo el ancho del contenedor */
+  max-width: 300px; /* Ancho máximo */
+  padding: 8px; /* Relleno interno */
+  border: 1px solid #ccc; /* Borde gris claro */
+  border-radius: 4px; /* Bordes redondeados */
+  font-size: 14px; /* Tamaño del texto */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  transition: border-color 0.3s ease; /* Efecto de transición */
+}
+
+/* Cambio de color en foco */
+.search-input:focus {
+  border-color: #1976d2; /* Azul para Supervisores */
+  outline: none; /* Quita el borde de foco predeterminado */
+}
+
+.left-card.red-border .search-input:focus {
+  border-color: #d32f2f; /* Rojo para Fiscales */
+}
+
+.search-input::placeholder {
+  color: #aaa; /* Color gris claro */
+  font-style: italic; /* Estilo itálico */
+}
+/* Cambia el borde cuando hay texto */
+.search-input:not(:placeholder-shown) {
+  border-color: #4caf50; /* Verde cuando hay texto */
+}
+.mat-form-field-underline {
+  transition: background-color 0.3s ease;
+}
+.supervisores-border {
+  border-color: blue; /* Borde azul para Supervisores */
+}
+
+.fiscales-border {
+  border-color: red; /* Borde rojo para Fiscales */
+}
+
+.input-field {
+  width: 80%;              /* O el tamaño que desees para el input */
+  max-width: 500px;
+  
+  padding: 20px;
+  box-sizing: border-box;
+  border: 2px solid transparent; /* Borde inicial transparente */
+  transition: border-color 0.9s ease; /* Suaviza el cambio de color del borde */
+}
+
+/* Estilos cuando el input está enfocado */
+input:focus {
+  outline: none;
+}
+
+.card-right {
+  width: 70%;
+  
+  margin: 20px auto;
+  padding: 4px;
+
 }

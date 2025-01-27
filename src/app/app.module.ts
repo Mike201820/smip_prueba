@@ -23,7 +23,9 @@ import { FormsModule } from '@angular/forms';
 import { AsignarPersonasComponent } from './asignar-personas/asignar-personas.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,10 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatSelectModule,
     MatButtonModule,
     FormsModule,
-    DragDropModule
+    DragDropModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
